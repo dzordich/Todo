@@ -9,7 +9,7 @@ class ToDoItem(models.Model):
     content = models.TextField()
 
     def __str__(self):
-        return f'{self.user.get_username} | {self.content[0, 71]}'
+        return f'{self.user.username} | {self.date} | {self.content[:71]}'
 
     class Meta:
         ordering = ['-date']
