@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from backend.api import ToDoResource
+from frontend.views import index
 
 todo_resource = ToDoResource()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(todo_resource.urls))
+    path('api/', include(todo_resource.urls)),
+    path('', index, name='index'),
 ]
