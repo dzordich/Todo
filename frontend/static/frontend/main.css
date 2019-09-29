@@ -1,0 +1,16 @@
+* {
+    color: whitesmoke;
+}
+
+body {
+    background-color: #171E26;
+}
+
+
+#content {
+    margin: 50px 25px 0 25px;
+}
+
+#navigation {
+    /* max-height: 40px; */
+}
