@@ -38,7 +38,7 @@ class Task extends Component {
         return (
             <div className="card bg-dark shadow-sm task dimmed" key={this.props.key}>
                 <div className="task-checkbox-area" onClick={this.handleClick} key={this.props.data.id}>
-                    <i className="fas fa-check-circle"></i>
+                    <a href="javascript:void(0);" role="button"><i className="fas fa-check-circle"></i></a>
                 </div>  
             <div className="task-text-area">
                 <span className="card-text">{this.props.data.content}</span>
@@ -49,7 +49,7 @@ class Task extends Component {
     return (
         <div className="card bg-dark shadow-sm task" key={this.props.key}>
             <div className="task-checkbox-area" onClick={this.handleClick} key={this.props.key}>
-                <i className="far fa-circle"></i>
+            <a href="javascript:void(0);" role="button" data-target=".task" aria-hidden="true"><i className="far fa-circle"></i></a>
             </div>  
             <div className="task-text-area">
                 <span className="card-text">{this.props.data.content}</span>
