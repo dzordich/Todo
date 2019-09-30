@@ -8,7 +8,7 @@ class Task(models.Model):
     completed = models.BooleanField()
     content = models.TextField()
 
-    board = models.ForeignKey('Board', on_delete=models.SET_NULL, null=True, blank=True)
+    board = models.ForeignKey('Board', on_delete=models.SET_NULL, null=True, blank=True, related_name='tasks')
 
     def __str__(self):
         return f'{self.user.username} | {self.date} | {self.content[:71]}'
