@@ -9,6 +9,7 @@ class Board extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.addNew = this.addNew.bind(this);
         this.state = {
             tasks: this.props.data.tasks
         };
@@ -31,6 +32,11 @@ class Board extends Component {
             <Task data={t} onClick={onClick} uri={t.resource_uri} />
         );
     }
+    addNew = (nt) => {
+        let tasks = this.state.tasks;
+        tasks.push(nt);
+        this.setState({ tasks: tasks });
+    }
     handleSubmit = (user, content) => {
         console.log(user, content);
         let t = {
@@ -46,9 +52,8 @@ class Board extends Component {
                 },
                 body: JSON.stringify(t)
         }).then(res => res.json())
-        .then(function (data) {
-            let tasks = this.state.tasks + data;
-            this.setState({ tasks: tasks });
+        .then((data) => {
+            this.addNew(data);
         })
     }
   

@@ -23,6 +23,7 @@ class BoardResource(ModelResource):
         queryset = Board.objects.all()
         authorization = Authorization()
         resource_name = "board"
+        always_return_data = True
 
 
 class TaskResource(ModelResource):
@@ -31,6 +32,7 @@ class TaskResource(ModelResource):
     class Meta:
         queryset = Task.objects.all()
         authorization = Authorization()
+        always_return_data = True
 
 
 
