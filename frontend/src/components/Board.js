@@ -28,7 +28,8 @@ const Board = ({ data, onClick }) =>
 
 Board.propTypes = {
   data: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  resourceURI: PropTypes.string.isRequired
 };
 
   export default Board;

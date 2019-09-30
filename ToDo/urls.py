@@ -35,4 +35,3 @@ urlpatterns = [
     path('api/', include(v1_api.urls)),
     path('', index, name='index'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
