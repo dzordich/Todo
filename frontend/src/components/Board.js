@@ -15,16 +15,19 @@ class Board extends Component {
         tasks: this.props.data.tasks
       };
     
-    getElID = function (data) {
-        return `board-id-${data.id}`;
+    getInputID = function (data) {
+        return `board-input-id-${data.id}`;
+    }
+    getButtonID = function (data) {
+        return `board-button-id-${data.id}`;
     }
     renderTask = function (data, onClick) {
         return data.map((t) => 
             <Task data={t} onClick={onClick} uri={t.resource_uri} />
         );
     }
-    handleSubmit = () => {
-        console.log('submitted')
+    handleSubmit = (user, content) => {
+        console.log(user, content)
     }
   
     render() {
@@ -38,8 +41,8 @@ class Board extends Component {
                 </ul>
             </div>
             <div className="card-body board-body">
-                <AddTask onSubmit={this.handleSubmit} endpoint="/api/v1/task/" elID={this.getElID(this.props.data)} />
-                {this.renderTask(this.props.data.tasks, this.props.data.onClick)}
+                <AddTask onSubmit={this.handleSubmit} endpoint="/api/v1/task/" inputID={this.getInputID(this.props.data)} buttonID={this.getButtonID(this.props.data)} />
+                {this.renderTask(this.state.tasks, this.props.data.onClick)}
             </div>
         </div>
       )

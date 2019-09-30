@@ -6,15 +6,21 @@ class AddTask extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     endpoint: PropTypes.string.isRequired,
-    elID: PropTypes.string.isRequired
+    inputID: PropTypes.string.isRequired,
+    buttonID: PropTypes.string.isRequired
   };
   state = {
-      expanded: false
+      expanded: false,
+      content: '',
+      user: 'dave'
     };
 
-  handleClick = () => {
+  handleChange = () => {
     this.setState({ expanded: true });
-    console.log('clicked')
+    document.getElementById(this.props.buttonID).addEventListener('click', () =>{
+        this.props.onSubmit(this.state.user);
+    })
+    return;
   }
 
   render() {
@@ -22,20 +28,20 @@ class AddTask extends Component {
         return (
         <div className="card bg-transparent border-dark shadow-sm new-task-card">
             <div className="input-group">
-                <input ref={input => input && input.focus()} type="text" className="form-control" id={this.props.elID}placeholder="New task" aria-label="New task" aria-describedby="button-addon2"></input>
+                <input type="text" className="form-control" id={this.props.elID}placeholder="New task" aria-label="New task" aria-describedby="button-addon2"></input>
                 <div className="input-group-append">
-                    <button className="btn btn-outline-primary" type="button" id="button-addon2">Add</button>
+                    <button className="btn btn-outline-primary" type="button" id={this.props.buttonID}>Add</button>
                 </div>
             </div>
         </div>
         )
     }
     return (
-        <div className="card bg-transparent border-dark shadow-sm new-task-card dimmed" onClick={this.handleClick}>
+        <div className="card bg-transparent border-dark shadow-sm new-task-card dimmed" >
             <div className="input-group">
-                <input type="text" className="form-control" placeholder="New task" aria-label="New task" aria-describedby="button-addon2"></input>
+                <input type="text" className="form-control" placeholder="New task" aria-label="New task" onChange={this.handleChange}></input>
                 <div className="input-group-append">
-                    <button className="btn btn-outline-primary" type="button" id="button-addon2">Add</button>
+                    <button className="btn btn-outline-primary" type="button" id={this.props.buttonID} disabled>Add</button>
                 </div>
             </div>
         </div>
