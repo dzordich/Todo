@@ -1,9 +1,9 @@
 from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
-from backend.models import ToDoItem
+from backend.models import Task
 
 
-class ToDoResource(ModelResource):
+class TaskResource(ModelResource):
     class Meta:
-        queryset = ToDoItem.objects.all()
+        queryset = Task.objects.all()
         authorization = Authorization()

@@ -17,15 +17,15 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
-from backend.api import ToDoResource
+from backend.api import TaskResource
 from frontend.views import index
 
-todo_resource = ToDoResource()
+task_resource = TaskResource()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('api/', include(todo_resource.urls)),
+    path('api/', include(task_resource.urls)),
     path('', index, name='index'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
