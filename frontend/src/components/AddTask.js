@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import $ from 'jquery';
 
+const PAGE_USER = document.querySelector('#loggedIn').dataset['username'];
+
 class AddTask extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
@@ -12,13 +14,14 @@ class AddTask extends Component {
   state = {
       expanded: false,
       content: '',
-      user: 'dave'
+      user: PAGE_USER
     };
 
-  handleChange = () => {
-    this.setState({ expanded: true });
+  handleChange = (e) => {
+      console.log(e.target.value)
+    this.setState({ expanded: true, content: e.target.value });
     document.getElementById(this.props.buttonID).addEventListener('click', () =>{
-        this.props.onSubmit(this.state.user);
+        this.props.onSubmit(this.state.user, document.getElementById(this.props.inputID).value);
     })
     return;
   }
@@ -28,7 +31,7 @@ class AddTask extends Component {
         return (
         <div className="card bg-transparent border-dark shadow-sm new-task-card">
             <div className="input-group">
-                <input type="text" className="form-control" id={this.props.elID}placeholder="New task" aria-label="New task" aria-describedby="button-addon2"></input>
+                <input type="text" className="form-control" id={this.props.inputID} placeholder="New task" aria-label="New task" aria-describedby="button-addon2"></input>
                 <div className="input-group-append">
                     <button className="btn btn-outline-primary" type="button" id={this.props.buttonID}>Add</button>
                 </div>

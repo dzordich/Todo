@@ -6,14 +6,19 @@ import AddTask from './AddTask';
 
 
 class Board extends Component {
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            tasks: this.props.data.tasks
+        };
+      }
     static propTypes = {
         data: PropTypes.object.isRequired,
         onClick: PropTypes.func.isRequired,
-        resourceURI: PropTypes.string.isRequired
+        resourceURI: PropTypes.string.isRequired,
+        userURI: PropTypes.string.isRequired
     };
-    state = {
-        tasks: this.props.data.tasks
-      };
     
     getInputID = function (data) {
         return `board-input-id-${data.id}`;
@@ -27,7 +32,24 @@ class Board extends Component {
         );
     }
     handleSubmit = (user, content) => {
-        console.log(user, content)
+        console.log(user, content);
+        let t = {
+            "user": this.props.userURI,
+            "content": content,
+            "board": this.props.resourceURI,
+            "completed": false
+        }
+        fetch("/api/v1/task/", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": `application/json`
+                },
+                body: JSON.stringify(t)
+        }).then(res => res.json())
+        .then(function (data) {
+            let tasks = this.state.tasks + data;
+            this.setState({ tasks: tasks });
+        })
     }
   
     render() {
