@@ -8,7 +8,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'frontend/main.css' %}" />
     <link rel="icon" type="image/png" href="{% static 'frontend/flag-icon.png' %}"/>
-    
+    <script src="https://kit.fontawesome.com/caf29237fd.js" crossorigin="anonymous"></script>
     
     <title>Todo</title>
 </head>
@@ -40,13 +40,44 @@
         </div>
     </nav>
     
+    
+    
+    <div id="content">
+        
+        <div class="card bg-light shadow board">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <span class="nav-link active"><strong class="text-body">Board Title</strong></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body board-body">
+                <div class="card bg-transparent border-dark shadow-sm new-task-card">
+                                    <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="New task" aria-label="New task" aria-describedby="button-addon2">
+                                            <div class="input-group-append">
+                                              <button class="btn btn-outline-primary" type="button" id="button-addon2">Add</button>
+                                            </div>
+                                          </div>
+                </div>
+                <div class="card bg-dark shadow-sm task">
+                    <div class="task-checkbox-area">
+                        <i class="far fa-circle"></i>
+                    </div>
+                    <div class="task-text-area">
+                        <span class="card-text">test test test</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-<div id="content">
-    <section class="section">
-        <div id="app" class="columns"></div>
-    </div>
-</section>
+        
+        
+        <section class="section">
+            <div id="app" class="columns"></div>
+        </div>
+    </section>
 </div>
 </body>
 <script src="{% static 'frontend/compiled.js' %}"></script>

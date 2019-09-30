@@ -11,6 +11,43 @@ body {
     margin: 50px 25px 0 25px;
 }
 
+.board {
+    color: black;
+    width: 270px;
+}
+.board-body {
+    padding: 0.6rem;
+    padding-top: 1rem;
+
+}
+.task {
+    padding: 0.65rem 0.95rem;
+    margin-bottom: 7px;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 26px auto;
+    grid-template-areas: 
+        "cb-area main-area";
+    
+}
+.task-checkbox-area {
+    grid-area: cb-area;
+}
+.task-text-area {
+    grid-area: main-area;
+    font-size: 0.8rem;
+}
+
+.new-task-card {
+    opacity: 0.6;
+    padding: 0.65rem 0.95rem;
+    margin-bottom: 7px;
+    display: flex;
+    font-size: 0.8rem;
+}
+
+
+
 #navigation {
     /* max-height: 40px; */
 }
