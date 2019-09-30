@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
-class ListDataProvider extends Component {
+class DataProvider extends Component {
   static propTypes = {
     endpoint: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired
@@ -13,10 +13,8 @@ class ListDataProvider extends Component {
       placeholder: "Loading..."
     };
   componentDidMount() {
-    let csrftoken = Cookies.get('csrftoken');
-    fetch(this.props.endpoint, {
-        headers: { "X-CSRFToken": csrftoken }
-    })
+    // let csrftoken = Cookies.get('csrftoken');
+    fetch(this.props.endpoint)
       .then(response => {
         if (response.status !== 200) {
           return this.setState({ placeholder: "Something went wrong" });
@@ -30,4 +28,4 @@ class ListDataProvider extends Component {
     return loaded ? this.props.render(data) :  <div className="spinner-border text-primary" role="status"><span className="sr-only">Loading...</span></div>;
   }
 }
-export default ListDataProvider;
+export default DataProvider;

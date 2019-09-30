@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Cookies from 'js-cookie';
 
 class Task extends Component {
   static propTypes = {
@@ -11,11 +10,12 @@ class Task extends Component {
       complete: this.props.data.completed,
     };
 
+
   render() {
     if (this.state.complete) {
         return (
-            <div className="card bg-dark shadow-sm task dimmed">
-                <div className="task-checkbox-area">
+            <div className="card bg-dark shadow-sm task dimmed" key={this.props.key}>
+                <div className="task-checkbox-area" key={this.props.data.id}>
                     <i className="fas fa-check-circle"></i>
                 </div>  
             <div className="task-text-area">
@@ -25,8 +25,8 @@ class Task extends Component {
         )
     }
     return (
-        <div className="card bg-dark shadow-sm task">
-            <div className="task-checkbox-area">
+        <div className="card bg-dark shadow-sm task" key={this.props.key}>
+            <div className="task-checkbox-area" onClick={() => this.setState({complete: true})} key={this.props.key}>
                 <i className="far fa-circle"></i>
             </div>  
             <div className="task-text-area">
