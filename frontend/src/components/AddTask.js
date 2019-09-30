@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import $ from 'jquery';
 
-class Task extends Component {
+class AddTask extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     endpoint: PropTypes.string.isRequired,
@@ -14,21 +14,7 @@ class Task extends Component {
 
   handleClick = () => {
     this.setState({ expanded: true });
-    $(`#${this.props.elID}`).trigger('focus')
-    let dict = { "completed": !this.state.complete };
-    fetch(this.props.endpoint, {
-        method: 'POST',
-        headers: {
-            "Content-Type": `application/json`
-        },
-        body: JSON.stringify(dict)
-    })
-    .then(response => {
-        if (response.status !== 200) {
-          return this.setState({ placeholder: "Something went wrong" });
-        }
-        return response.json();
-      });
+    $(`#${this.props.elID}`).trigger('focus');
   }
 
   render() {
@@ -58,4 +44,4 @@ class Task extends Component {
 }
 
 
-export default Task;
+export default AddTask;

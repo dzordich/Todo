@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
-from backend.api import TaskResource, BoardResource
+from backend.api import TaskResource, BoardResource, UserResource
 from frontend.views import index
 from tastypie.api import Api
 
@@ -27,6 +27,7 @@ board_resource = BoardResource()
 v1_api = Api(api_name='v1')
 v1_api.register(TaskResource())
 v1_api.register(BoardResource())
+v1_api.register(UserResource())
 
 urlpatterns = [
     path('admin/', admin.site.urls),

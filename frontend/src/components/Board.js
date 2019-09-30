@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Task from "./Task";
+import AddTask from './AddTask';
 
 
 const renderTask = function (data, onClick) {
@@ -20,6 +21,7 @@ const Board = ({ data, onClick }) =>
             </ul>
         </div>
         <div className="card-body board-body">
+            <AddTask endpoint="" />
             {renderTask(data.tasks, onClick)}
         </div>
     </div>
