@@ -5,7 +5,7 @@ from backend.models import Task, Board
 
 
 class BoardResource(ModelResource):
-    tasks = fields.ToManyField('backend.api.CommentResource2', 'tasks')
+    tasks = fields.ToManyField('backend.api.TaskResource', 'tasks', full=True)
 
     class Meta:
         queryset = Board.objects.all()
