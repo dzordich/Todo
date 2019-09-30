@@ -39,11 +39,14 @@ body {
 }
 
 .new-task-card {
-    opacity: 0.6;
     padding: 0.65rem 0.95rem;
     margin-bottom: 7px;
     display: flex;
     font-size: 0.8rem;
+}
+
+.dimmed {
+    opacity: 0.65;
 }
 
 
