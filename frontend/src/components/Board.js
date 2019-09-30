@@ -5,7 +5,7 @@ import Task from "./Task";
 
 const renderTask = function (data, onClick) {
     return data.map((t) => 
-        <Task data={t} onClick={onClick}  />
+        <Task data={t} onClick={onClick} uri={t.resource_uri} />
     );
 }
 

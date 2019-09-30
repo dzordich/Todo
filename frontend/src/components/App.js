@@ -19,7 +19,7 @@ class App extends React.Component {
   
     render() {
       return (
-        <DataProvider endpoint="api/board/1" 
+        <DataProvider endpoint="api/v1/board/1" 
         render={data => <Board data={data} onClick={this.handleClick} />} />
       );
     }

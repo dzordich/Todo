@@ -19,14 +19,19 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from backend.api import TaskResource, BoardResource
 from frontend.views import index
+from tastypie.api import Api
 
 task_resource = TaskResource()
 board_resource = BoardResource()
 
+v1_api = Api(api_name='v1')
+v1_api.register(TaskResource())
+v1_api.register(BoardResource())
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('api/', include(board_resource.urls)),
+    path('api/', include(v1_api.urls)),
     path('', index, name='index'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
