@@ -14,7 +14,7 @@ class AddTask extends Component {
 
   handleClick = () => {
     this.setState({ expanded: true });
-    $(`#${this.props.elID}`).trigger('focus');
+    console.log('clicked')
   }
 
   render() {
@@ -22,7 +22,7 @@ class AddTask extends Component {
         return (
         <div className="card bg-transparent border-dark shadow-sm new-task-card">
             <div className="input-group">
-                <input type="text" className="form-control" id={this.props.elID}placeholder="New task" aria-label="New task" aria-describedby="button-addon2"></input>
+                <input ref={input => input && input.focus()} type="text" className="form-control" id={this.props.elID}placeholder="New task" aria-label="New task" aria-describedby="button-addon2"></input>
                 <div className="input-group-append">
                     <button className="btn btn-outline-primary" type="button" id="button-addon2">Add</button>
                 </div>
@@ -31,7 +31,7 @@ class AddTask extends Component {
         )
     }
     return (
-        <div className="card bg-transparent border-dark shadow-sm new-task-card dimmed">
+        <div className="card bg-transparent border-dark shadow-sm new-task-card dimmed" onClick={this.handleClick}>
             <div className="input-group">
                 <input type="text" className="form-control" placeholder="New task" aria-label="New task" aria-describedby="button-addon2"></input>
                 <div className="input-group-append">
