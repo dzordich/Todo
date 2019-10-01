@@ -30,6 +30,7 @@ class Board extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addNew = this.addNew.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
+    this.updatePositions = this.updatePositions.bind(this);
     this.state = {
       tasks: this.props.data.tasks
     };
@@ -40,6 +41,34 @@ class Board extends Component {
     resourceURI: PropTypes.string.isRequired,
     userURI: PropTypes.string.isRequired
   };
+  updatePositions = (data) => {
+    let completed = [];
+    let incomplete = [];
+    for(let x in data){
+      if (data[x].completed) {
+        completed.push(data[x]);
+      } 
+      else { incomplete.push(data[x]) 
+      }      
+    }
+    let newOrder = incomplete.concat(completed); 
+    this.setState({
+      tasks: newOrder
+    });
+    let places = [];
+    for (let i = 0; i < data.length; i++) {
+      places.push({'pk': data[i].id, 'index': i});
+    }
+    let csrftoken = Cookies.get('csrftoken');
+    fetch('/api/positions/', {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": `application/json`,
+        "X-CSRFToken": csrftoken
+      },
+      body: JSON.stringify(places)
+    }).then(res => res.json())
+  }
   onDragEnd(result) {
     // dropped outside the list
     if (!result.destination) {
@@ -52,25 +81,7 @@ class Board extends Component {
       result.destination.index
       );
       
-      this.setState({
-        tasks: items
-      });
-      let places = [];
-      for (let i = 0; i < items.length; i++) {
-        places.push({'pk': items[i].id, 'index': i});
-      }
-      let csrftoken = Cookies.get('csrftoken');
-      fetch('/api/positions/', {
-        method: 'PATCH',
-        headers: {
-          "Content-Type": `application/json`,
-          "X-CSRFToken": csrftoken
-        },
-        body: JSON.stringify(places)
-      }).then(res => res.json())
-      .then((data) => {
-        console.log(data);
-      })
+      this.updatePositions(items);
 
     }
   getInputID = function (data) {
@@ -79,23 +90,6 @@ class Board extends Component {
   getButtonID = function (data) {
     return `board-button-id-${data.id}`;
   }
-  renderTask = function (data) {
-    return this.state.tasks.map((t, index) => 
-    <Draggable key={t.date} draggableId={t.id} index={index}>
-      {(provided, snapshot) => (
-        <div
-        ref={provided.innerRef}
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        style={getItemStyle(
-          snapshot.isDragging,
-          provided.draggableProps.style
-          )}>  
-          <Task data={t} uri={t.resource_uri} />
-        </div>
-      )}
-    </Draggable>
-    )}
   addNew = (nt) => {
     let tasks = this.state.tasks;
     tasks.unshift(nt);
