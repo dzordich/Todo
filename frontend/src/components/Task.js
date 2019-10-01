@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import { Draggable } from "react-beautiful-dnd";
 import PropTypes from "prop-types";
+
+
+
+  
+
+
 
 class Task extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired,
     uri: PropTypes.string.isRequired
   };
   state = {
@@ -36,7 +42,7 @@ class Task extends Component {
   render() {
     if (this.state.complete) {
         return (
-            <div className="card bg-dark shadow-sm task dimmed" key={this.props.key}>
+            <div className="card bg-dark shadow-sm task dimmed" key={this.props.data.id}>
                 <div className="task-checkbox-area" onClick={this.handleClick} key={this.props.data.id}>
                     <a href="javascript:void(0);" role="button"><i className="fas fa-check-circle"></i></a>
                 </div>  
