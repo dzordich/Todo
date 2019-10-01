@@ -11,7 +11,8 @@ import PropTypes from "prop-types";
 class Task extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-    uri: PropTypes.string.isRequired
+    uri: PropTypes.string.isRequired,
+    handleComplete: PropTypes.func.isRequired
   };
   state = {
       complete: this.props.data.completed,
@@ -23,6 +24,7 @@ class Task extends Component {
     } else {
         this.setState({complete: true});
     }
+    this.props.handleComplete(this.props.data.id)
     let dict = { "completed": !this.state.complete };
     fetch(this.props.uri, {
         method: 'PATCH',
@@ -35,7 +37,7 @@ class Task extends Component {
         if (response.status !== 200) {
           return this.setState({ placeholder: "Something went wrong" });
         }
-        return response.json();
+        
       });
   }
 

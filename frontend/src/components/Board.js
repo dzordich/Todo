@@ -5,7 +5,18 @@ import Task from "./Task";
 import AddTask from './AddTask';
 import Cookies from 'js-cookie';
 
-
+const organize = (data) => {
+  let completed = [];
+  let incomplete = [];
+  for(let x in data){
+    if (data[x].completed) {
+      completed.push(data[x]);
+    } 
+    else { incomplete.push(data[x]) 
+    }      
+  }
+  return incomplete.concat(completed); 
+}
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -15,9 +26,7 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-});
+const taskEquals = (task1, task2) => task1.id === task2.id
 
 const getItemStyle = (isDragging, draggableStyle) => ({
   background: isDragging ? "lightgreen" : "grey",
@@ -28,11 +37,12 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleComplete = this.handleComplete.bind(this);
     this.addNew = this.addNew.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
     this.updatePositions = this.updatePositions.bind(this);
     this.state = {
-      tasks: this.props.data.tasks
+      tasks: organize(this.props.data.tasks)
     };
   }
   static propTypes = {
@@ -67,7 +77,7 @@ class Board extends Component {
         "X-CSRFToken": csrftoken
       },
       body: JSON.stringify(places)
-    }).then(res => res.json())
+    });
   }
   onDragEnd(result) {
     // dropped outside the list
@@ -93,7 +103,7 @@ class Board extends Component {
   addNew = (nt) => {
     let tasks = this.state.tasks;
     tasks.unshift(nt);
-    this.setState({ tasks: tasks });
+    this.updatePositions(tasks);
   }
   handleSubmit = (user, content) => {
     console.log(user, content);
@@ -113,6 +123,40 @@ class Board extends Component {
     .then((data) => {
       this.addNew(data);
     })
+  }
+  handleComplete = (taskID) => {
+    console.log("got back to board")
+    let completed = [];
+    let incomplete = [];
+    let taskToUpdate;
+    let x = -1;
+    for (let i = 0; i < this.state.tasks.length; i++) {
+      if (this.state.tasks[i].id == taskID) {
+        taskToUpdate = this.state.tasks[i];
+      }
+      else if (this.state.tasks[i].completed) {
+        completed.push(this.state.tasks[i]);
+      } 
+      else { incomplete.push(this.state.tasks[i]) 
+      }      
+    }
+    incomplete.push(taskToUpdate);
+    let updated = incomplete.concat(completed);
+    console.log(updated);
+    this.setState({ tasks: updated });
+    let places = [];
+    for (let i = 0; i < updated.length; i++) {
+      places.push({'pk': updated[i].id, 'index': i});
+    }
+    let csrftoken = Cookies.get('csrftoken');
+    fetch('/api/positions/', {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": `application/json`,
+        "X-CSRFToken": csrftoken
+      },
+      body: JSON.stringify(places)
+    });
   }
   
   render() {
@@ -144,7 +188,7 @@ class Board extends Component {
                     snapshot.isDragging,
                     provided.draggableProps.style
                     )}>  
-                      <Task data={t} uri={t.resource_uri} />
+                      <Task data={t} uri={t.resource_uri} handleComplete={this.handleComplete} />
                     </div>)}
                   </Draggable>
                 )}
