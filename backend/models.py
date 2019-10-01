@@ -9,12 +9,13 @@ class Task(models.Model):
     content = models.TextField()
 
     board = models.ForeignKey('Board', on_delete=models.SET_NULL, null=True, blank=True, related_name='tasks')
+    index = models.IntegerField(default=0)
 
     def __str__(self):
         return f'{self.user.username} | {self.date} | {self.content[:71]}'
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['index']
 
 
 class Board(models.Model):

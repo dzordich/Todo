@@ -34,7 +34,7 @@ class Board extends Component {
     }
     addNew = (nt) => {
         let tasks = this.state.tasks;
-        tasks.push(nt);
+        tasks.unshift(nt);
         this.setState({ tasks: tasks });
     }
     handleSubmit = (user, content) => {
