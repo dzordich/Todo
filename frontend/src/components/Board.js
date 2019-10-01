@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import PropTypes from "prop-types";
 import Task from "./Task";
 import AddTask from './AddTask';
+import Cookies from 'js-cookie';
 
 
 
@@ -54,6 +55,23 @@ class Board extends Component {
       this.setState({
         tasks: items
       });
+      let places = [];
+      for (let i = 0; i < items.length; i++) {
+        places.push({'pk': items[i].id, 'index': i});
+      }
+      let csrftoken = Cookies.get('csrftoken');
+      fetch('/api/positions/', {
+        method: 'PATCH',
+        headers: {
+          "Content-Type": `application/json`,
+          "X-CSRFToken": csrftoken
+        },
+        body: JSON.stringify(places)
+      }).then(res => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+
     }
   getInputID = function (data) {
     return `board-input-id-${data.id}`;
