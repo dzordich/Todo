@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { DragDropContext } from 'react-beautiful-dnd';
 import DataProvider from "./DataProvider";
 import Board from "./Board";
 
