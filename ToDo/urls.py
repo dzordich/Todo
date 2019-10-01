@@ -18,8 +18,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from backend.api import TaskResource, BoardResource, UserResource
+from backend.views import update_pos
 from frontend.views import index
 from tastypie.api import Api
+
 
 task_resource = TaskResource()
 board_resource = BoardResource()
@@ -33,5 +35,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('api/', include(v1_api.urls)),
+    path('api/positions/', update_pos),
     path('', index, name='index'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
