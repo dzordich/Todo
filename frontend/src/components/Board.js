@@ -122,6 +122,7 @@ class Board extends Component {
     .then((data) => {
       this.addNew(data);
     })
+    return;
   }
   handleComplete = (taskID) => {
     console.log("got back to board")
