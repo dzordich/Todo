@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-
-import DataProvider from "./DataProvider";
 import Board from "./Board";
 
 const PAGE_USER = document.querySelector('#loggedIn').dataset['username'];
@@ -16,22 +14,27 @@ class App extends React.Component {
         boards: []
       };
     }
-    // componentDidMount() {
-    //   // let csrftoken = Cookies.get('csrftoken');
-    //   fetch(this.props.endpoint)
-    //     .then(response => {
-    //       if (response.status !== 200) {
-    //         return this.setState({ placeholder: "Something went wrong" });
-    //       }
-    //       return response.json();
-    //     })
-    //     .then(data => this.setState({ data: data, loaded: true }));
-    // }
+    componentDidMount() {
+      // let csrftoken = Cookies.get('csrftoken');
+      fetch(BOARDS_ENDPOINT)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => this.setState({ boards: data.objects, loaded: true }));
+    }
     render() {
+      if (!this.state.loaded) {
+        return (
+          <div className="spinner-border text-primary" role="status"><span className="sr-only">Loading...</span></div>
+          );
+      }
       return (
-        <DataProvider endpoint={BOARDS_ENDPOINT} 
-      render={(data) => data.objects.map((t) => <div className="board-container" key={t.id}><Board data={t} resourceURI={t.resource_uri} userURI={t.user.resource_uri} /></div> )} />
-      );
+        this.state.boards.map((t) => <div className="board-container" key={t.id}><Board data={t} resourceURI={t.resource_uri} userURI={t.user.resource_uri} /></div> )
+      )
+        // return (
+        //   <DataProvider endpoint={BOARDS_ENDPOINT} 
+        //     render={(data) => data.objects.map((t) => <div className="board-container" key={t.id}><Board data={t} resourceURI={t.resource_uri} userURI={t.user.resource_uri} /></div> )} />
+        // );
     }
   }
 
