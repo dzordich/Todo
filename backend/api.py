@@ -73,7 +73,3 @@ class TaskResource(ModelResource):
         queryset = Task.objects.all()
         authorization = Authorization()
         always_return_data = True
-
-
-
-
