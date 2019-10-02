@@ -24,6 +24,9 @@ class BoardResource(ModelResource):
         authorization = Authorization()
         resource_name = "board"
         always_return_data = True
+        filtering = {
+            "user": "iexact",
+        }
 
 
 class TaskResource(ModelResource):
