@@ -13,6 +13,7 @@ django-registration-redux = "*"
 python-mimeparse = "*"
 django-tastypie = "*"
 djangorestframework = "*"
+django-allauth = "*"
 
 [requires]
 python_version = "3.7"

@@ -29,11 +29,11 @@
                     data-userstring="{{ user.username }}" tabindex="-1" aria-disabled="true"><strong>{{ request.user }}</strong></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'auth_logout' %}">Log Out</a>
+                    <a class="nav-link" href="{% url 'account_logout' %}">Log Out</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'auth_login' %}">Log In</a>
+                    <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
                 </li>
                 {% endif %}
             </ul>

@@ -33,7 +33,8 @@ v1_api.register(UserResource())
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/', include('allauth.urls')),
+    # path('accounts/', include('registration.backends.simple.urls')),
     path('api/', include(v1_api.urls)),
     path('api/positions/', update_pos),
     path('', index, name='index'),
