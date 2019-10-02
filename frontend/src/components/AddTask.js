@@ -22,7 +22,13 @@ class AddTask extends Component {
     this.setState({ expanded: true, content: e.target.value });
     document.getElementById(this.props.buttonID).addEventListener('click', () =>{
         this.props.onSubmit(this.state.user, document.getElementById(this.props.inputID).value);
+        this.setState({ expanded: false, content: '' })
     })
+    document.getElementById(this.props.inputID).addEventListener("keyup", event => {
+      if (event.key !== "Enter" || !document.getElementById(this.props.inputID).value) return;
+      document.getElementById(this.props.buttonID).click()
+      event.preventDefault()
+  });
     return;
   }
 
@@ -42,7 +48,7 @@ class AddTask extends Component {
     return (
         <div className="card bg-transparent border-dark shadow-sm new-task-card dimmed" >
             <div className="input-group">
-                <input type="text" className="form-control" placeholder="New task" aria-label="New task" onChange={this.handleChange}></input>
+                <input type="text" className="form-control" id={this.props.inputID} placeholder="New task" aria-label="New task" onChange={this.handleChange} value=""></input>
                 <div className="input-group-append">
                     <button className="btn btn-outline-primary" type="button" id={this.props.buttonID} disabled>Add</button>
                 </div>
