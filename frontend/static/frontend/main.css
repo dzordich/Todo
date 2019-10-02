@@ -23,6 +23,7 @@ body {
     color: black;
     width: 270px;
     margin: 0 10px;
+    height: auto;
 }
 .board-body {
     padding: 0.6rem;
