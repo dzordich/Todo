@@ -30,7 +30,7 @@ class App extends React.Component {
     render() {
       return (
         <DataProvider endpoint={BOARDS_ENDPOINT} 
-        render={data => <Board data={data} resourceURI={data.resource_uri} userURI={data.user.resource_uri} />} />
+      render={(data) => data.objects.map((t) => <Board data={t} resourceURI={t.resource_uri} userURI={t.user.resource_uri} /> )} />
       );
     }
   }

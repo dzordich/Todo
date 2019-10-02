@@ -13,6 +13,12 @@ body {
     flex-wrap: nowrap;
 }
 
+#app {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+
 .board {
     color: black;
     width: 270px;
