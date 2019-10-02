@@ -6,7 +6,6 @@ body {
     background-color: #171E26;
 }
 
-
 #content {
     margin: 50px 25px 0 25px;
     display: flex;
@@ -18,7 +17,9 @@ body {
     flex-wrap: nowrap;
 }
 
+/*** COMPONENT STYLES ***/
 
+/* Board component styling */
 .board {
     color: black;
     width: 270px;
@@ -30,6 +31,8 @@ body {
     padding-top: 1rem;
 
 }
+
+/* Task component styling */
 .task {
     padding: 0.65rem 0.95rem;
     margin-bottom: 7px;
@@ -48,12 +51,15 @@ body {
     font-size: 0.8rem;
 }
 
+/* AddTask component styling */
 .new-task-card {
     padding: 0.65rem 0.95rem;
     margin-bottom: 7px;
     display: flex;
     font-size: 0.8rem;
 }
+
+/* AddBoard component styling */
 .new-board {
     width: 270px;
     height: 163.33px;
@@ -86,9 +92,18 @@ body {
     margin-left: 10px;
 }
 
+
+/* Utility classes */
+
 .dimmed {
     opacity: 0.65;
 }
+
+.no-wrap-flex {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
 
 
 

@@ -42,7 +42,8 @@ class App extends React.Component {
       }).then(res => res.json())
       .then((data) => {
         let boards = this.state.boards;
-        boards.push()
+        boards.push(data);
+        this.setState({ boards: boards });
       })
     }
     render() {
@@ -52,9 +53,9 @@ class App extends React.Component {
           );
       }
       return (
-        <div>
+        <div className="no-wrap-flex">
           {this.state.boards.map((t) => <div className="board-container" key={t.id}><Board data={t} resourceURI={t.resource_uri} userURI={t.user.resource_uri} /></div> )}
-          <AddBoard onSubmit={} />
+          <div className="board-container"><AddBoard onSubmit={this.onSubmit} /></div>
         </div>
       )
     }

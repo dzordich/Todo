@@ -16,8 +16,8 @@ class AddBoard extends Component {
       this.setState({ expanded: true });
   }
   handleChange = (e) => {
-        console.log(e.target.value)
-        this.setState({ expanded: true, content: e.target.value });
+        // console.log(e.target.value)
+        this.setState({ expanded: true, content: this.state.content + e.target.value });
         document.getElementById("new-map-submit").addEventListener('click', () =>{
             this.props.onSubmit(document.getElementById("new-board-input-field").value);
             this.setState({ expanded: false, content: '' });
@@ -27,7 +27,6 @@ class AddBoard extends Component {
             document.getElementById("new-map-submit").click()
             event.preventDefault();
         });
-        return;
   }
 
   render() {
@@ -37,7 +36,7 @@ class AddBoard extends Component {
         <div className="card-header">
             <ul className="nav nav-tabs card-header-tabs new-board-header">
                 <li className="nav-item">
-                    <span className="nav-link active"><input id="new-board-input-field" autoFocus onChange={this.handleChange} type="text" className="form-control" placeholder="Board title" aria-label="Board title" value=""></input></span>
+                    <span className="nav-link active"><input id="new-board-input-field" autoFocus onChange={this.handleChange} type="text" className="form-control" placeholder="Board title" aria-label="Board title"></input></span>
                 </li>
                 <li className="nav-item">
                     <div className="save-badge-cont">
