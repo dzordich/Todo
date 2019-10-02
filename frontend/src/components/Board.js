@@ -47,7 +47,6 @@ class Board extends Component {
   }
   static propTypes = {
     data: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired,
     resourceURI: PropTypes.string.isRequired,
     userURI: PropTypes.string.isRequired
   };

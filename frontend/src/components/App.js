@@ -4,24 +4,32 @@ import ReactDOM from "react-dom";
 import DataProvider from "./DataProvider";
 import Board from "./Board";
 
+const PAGE_USER = document.querySelector('#loggedIn').dataset['username'];
 
 
 class App extends React.Component {
     constructor(props) {
       super(props);
-      this.handleClick = this.handleClick.bind(this);
       this.state = {
+        loaded: false,
+        boards: []
       };
     }
-  
-    handleClick(e) {
-      event.target.parentElement.className += 'dimmed';
+    componentDidMount() {
+      // let csrftoken = Cookies.get('csrftoken');
+      fetch(this.props.endpoint)
+        .then(response => {
+          if (response.status !== 200) {
+            return this.setState({ placeholder: "Something went wrong" });
+          }
+          return response.json();
+        })
+        .then(data => this.setState({ data: data, loaded: true }));
     }
-  
     render() {
       return (
         <DataProvider endpoint="api/v1/board/1" 
-        render={data => <Board data={data} onClick={this.handleClick} resourceURI={data.resource_uri} userURI={data.user.resource_uri} />} />
+        render={data => <Board data={data} resourceURI={data.resource_uri} userURI={data.user.resource_uri} />} />
       );
     }
   }
