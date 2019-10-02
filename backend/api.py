@@ -54,7 +54,7 @@ class UserResource(ModelResource):
 
 class BoardResource(ModelResource):
     user = fields.ForeignKey(UserResource, 'user', full=True)
-    tasks = fields.ToManyField('backend.api.TaskResource', 'tasks', full=True)
+    tasks = fields.ToManyField('backend.api.TaskResource', 'tasks', full=True, null=True)
 
     class Meta:
         queryset = Board.objects.all()

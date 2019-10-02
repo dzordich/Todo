@@ -56,10 +56,14 @@ body {
 }
 .new-board {
     width: 270px;
-    height: 100px;
+    height: 163.33px;
+    margin: 0 10px;
     border-style: dashed;
     border-radius: 8px;
     border-width: 3px;
+}
+.new-board-header {
+    flex-wrap: nowrap;
 }
 .new-board-body {
     vertical-align: middle;
@@ -70,6 +74,16 @@ body {
 }
 .new-board-text {
     color: #6C757D
+}
+.board-title-input {
+    max-width: 95%;
+}
+.save-badge-cont {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: auto;
+    margin-left: 10px;
 }
 
 .dimmed {

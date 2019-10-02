@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Board from "./Board";
+import AddBoard from "./AddBoard"
+import Cookies from 'js-cookie';
 
 const PAGE_USER = document.querySelector('#loggedIn').dataset['username'];
+const USER_URI = `/api/v1/user/${PAGE_USER}`
 
 const BOARDS_ENDPOINT = `api/v1/board/?user=${encodeURIComponent(PAGE_USER)}`
 
 class App extends React.Component {
     constructor(props) {
       super(props);
+      this.onSubmit = this.onSubmit.bind(this);
       this.state = {
         loaded: false,
         boards: []
@@ -22,6 +26,25 @@ class App extends React.Component {
         })
         .then(data => this.setState({ boards: data.objects, loaded: true }));
     }
+    onSubmit(name) {
+      let b = {
+        "name": name,
+        "user": USER_URI
+      }
+      let csrftoken = Cookies.get('csrftoken');
+      fetch('api/v1/board/', {
+        method: 'POST',
+        headers: {
+          "Content-Type": `application/json`,
+          "X-CSRFToken": csrftoken
+        },
+        body: JSON.stringify(b)
+      }).then(res => res.json())
+      .then((data) => {
+        let boards = this.state.boards;
+        boards.push()
+      })
+    }
     render() {
       if (!this.state.loaded) {
         return (
@@ -29,7 +52,10 @@ class App extends React.Component {
           );
       }
       return (
-        this.state.boards.map((t) => <div className="board-container" key={t.id}><Board data={t} resourceURI={t.resource_uri} userURI={t.user.resource_uri} /></div> )
+        <div>
+          {this.state.boards.map((t) => <div className="board-container" key={t.id}><Board data={t} resourceURI={t.resource_uri} userURI={t.user.resource_uri} /></div> )}
+          <AddBoard onSubmit={} />
+        </div>
       )
     }
   }
