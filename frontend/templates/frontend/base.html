@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{% static 'frontend/main.css' %}" />
     <link rel="icon" type="image/png" href="{% static 'frontend/flag-icon.png' %}"/>
     <script src="https://kit.fontawesome.com/caf29237fd.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     
     <title>Todo</title>
 </head>
@@ -45,6 +47,22 @@
     <div id="content">
         
         <div id="app"></div>
+        <div class="card bg-light shadow board">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <span class="nav-link active"><strong class="text-body">Board Title</strong></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="board-container">
+        <div class="card border-secondary text-secondary new-board bg-transparent">
+            <div class="card-body text-primary mx-auto my-auto new-board-body">
+              <h5 class="card-title pb-0 mb-0 new-board-text"><strong class="new-board-text"><i class="fas fa-plus new-board-text"></i> Add Board</strong></h5>
+            </div>
+        </div>
+        </div>
         
     </div>
 

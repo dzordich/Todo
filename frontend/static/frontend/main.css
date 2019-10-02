@@ -54,6 +54,23 @@ body {
     display: flex;
     font-size: 0.8rem;
 }
+.new-board {
+    width: 270px;
+    height: 100px;
+    border-style: dashed;
+    border-radius: 8px;
+    border-width: 3px;
+}
+.new-board-body {
+    vertical-align: middle;
+    height: auto;
+    display: flex;
+    align-items: center;
+    color: #6C757D
+}
+.new-board-text {
+    color: #6C757D
+}
 
 .dimmed {
     opacity: 0.65;

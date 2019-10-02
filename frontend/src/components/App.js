@@ -31,10 +31,6 @@ class App extends React.Component {
       return (
         this.state.boards.map((t) => <div className="board-container" key={t.id}><Board data={t} resourceURI={t.resource_uri} userURI={t.user.resource_uri} /></div> )
       )
-        // return (
-        //   <DataProvider endpoint={BOARDS_ENDPOINT} 
-        //     render={(data) => data.objects.map((t) => <div className="board-container" key={t.id}><Board data={t} resourceURI={t.resource_uri} userURI={t.user.resource_uri} /></div> )} />
-        // );
     }
   }
 
