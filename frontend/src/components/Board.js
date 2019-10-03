@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Task from "./Task";
 import AddTask from './AddTask';
 import Cookies from 'js-cookie';
+import $ from "jquery";
 
 const organize = (data) => {
   let completed = [];
@@ -132,6 +133,7 @@ class Board extends Component {
     for (let i = 0; i < this.state.tasks.length; i++) {
       if (this.state.tasks[i].id == taskID) {
         taskToUpdate = this.state.tasks[i];
+        taskToUpdate.completed = true;
       }
       else if (this.state.tasks[i].completed) {
         completed.push(this.state.tasks[i]);
@@ -164,6 +166,7 @@ class Board extends Component {
     for (let i = 0; i < this.state.tasks.length; i++) {
       if (this.state.tasks[i].id == taskID) {
         taskToUpdate = this.state.tasks[i];
+        taskToUpdate.completed = false;
       }
       else if (this.state.tasks[i].completed) {
         completed.push(this.state.tasks[i]);

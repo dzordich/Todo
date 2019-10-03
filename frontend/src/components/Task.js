@@ -12,6 +12,7 @@ class Task extends Component {
   };
   state = {
       complete: this.props.data.completed,
+      classes: "card bg-dark shadow-sm task dimmed"
     };
 
   handleClick = () => {
@@ -19,7 +20,7 @@ class Task extends Component {
         this.setState({complete: false});
         this.props.undoComplete(this.props.data.id);
     } else {
-        this.setState({complete: true});
+        this.setState({complete: true, classes: this.state.classes + " bounce-top"});
         this.props.handleComplete(this.props.data.id);
     }
     let dict = { "completed": !this.state.complete };
@@ -32,23 +33,19 @@ class Task extends Component {
         },
         body: JSON.stringify(dict)
     })
-    .then(response => {
-        if (response.status !== 200) {
-          return this.setState({ placeholder: "Something went wrong" });
-        }
-      });
   }
 
   render() {
     if (this.state.complete) {
         return (
-            <div className="card bg-dark shadow-sm task dimmed" key={this.props.data.id}>
+            <div className={this.state.classes} key={this.props.data.id} id={"task-id-" + this.props.data.id}>
                 <div className="task-checkbox-area" onClick={this.handleClick} key={this.props.data.id}>
                     <a href="#" role="button"><i className="fas fa-check-circle"></i></a>
                 </div>  
             <div className="task-text-area">
                 <span className="card-text">{this.props.data.content}</span>
             </div>
+            <a className="badge badge-pill badge-danger delete-button"><i className="far fa-times-circle delete-icon"></i></a>
         </div>
         )
     }
