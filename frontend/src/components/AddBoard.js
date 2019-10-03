@@ -16,12 +16,12 @@ class AddBoard extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
   };
-  state = {
-      
-    };
+
   escape = () => this.setState({ expanded: false, content: '' })
   handleClick = () => {
-      this.setState({ expanded: true });
+      this.setState({ expanded: true, content: '' });
+      console.log('ahh')
+      return;
       
   }
   handleChange = (e) => {
@@ -38,24 +38,21 @@ class AddBoard extends Component {
         });
   }
   componentDidUpdate() {
+    if (!this.state.expanded) return;
     var newBoardArea = document.getElementById('newboard')
     // go back to collapsed state if user clicks anywhere else on page
     if (document.getElementById('newboard') && this.state.expanded){
         document.addEventListener('click', (event) => {
             if (!event.target.closest('.add-board-component')) {
                 this.escape();
-                return;
-            }
-            return;
-        })
+            }        })
         document.addEventListener('keydown', (event) => {
             if (event.key === "Escape") {
+                event.preventDefault();
                 this.escape();
-                return;
             }
         })
     }
-    else { return; }
   }
   render() {
     if (this.state.expanded) {
@@ -87,7 +84,7 @@ class AddBoard extends Component {
         )
     }
     return (
-        <div className="card border-secondary text-secondary new-board bg-transparent">
+        <div className="card border-secondary text-secondary new-board bg-transparent add-board-component">
             <div className="card-body mx-auto my-auto new-board-body">
                 <a href="#" onClick={this.handleClick}><h5 className="card-title pb-0 mb-0 new-board-text"><strong className="new-board-text"><i className="fas fa-plus new-board-text"></i> Add Board</strong></h5></a>
             </div>

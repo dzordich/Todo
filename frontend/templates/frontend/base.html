@@ -24,18 +24,18 @@
         </button>
         
         <div class="collapse navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav mt-2 mt-lg-0 nav-dropdown">
                 {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" id="loggedIn" data-username="{{ user.pk }}"
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link disabled ml-auto" href="#" id="loggedIn" data-username="{{ user.pk }}"
                     data-userstring="{{ user.username }}" tabindex="-1" aria-disabled="true"><strong>{{ request.user }}</strong></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_logout' %}">Log Out</a>
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link ml-auto" href="{% url 'account_logout' %}">Log Out</a>
                 </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link ml-auto" href="{% url 'account_login' %}">Log In</a>
                 </li>
                 {% endif %}
             </ul>
