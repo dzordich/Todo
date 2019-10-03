@@ -58,7 +58,7 @@ class BoardResource(ModelResource):
 
     class Meta:
         queryset = Board.objects.all()
-        authorization = Authorization()
+        authorization = UserObjectsOnlyAuthorization()
         resource_name = "board"
         always_return_data = True
         filtering = {

@@ -4,23 +4,32 @@ import PropTypes from "prop-types";
 const PAGE_USER = document.querySelector('#loggedIn').dataset['username'];
 
 class AddBoard extends Component {
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  };
-  state = {
+  constructor(props) {
+    super(props);
+    this.escape = this.escape.bind(this);
+    this.state = {
       expanded: false,
       content: '',
       user: PAGE_USER
     };
+  }
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+  state = {
+      
+    };
+  escape = () => this.setState({ expanded: false, content: '' })
   handleClick = () => {
       this.setState({ expanded: true });
+      
   }
   handleChange = (e) => {
-        // console.log(e.target.value)
+
         this.setState({ expanded: true, content: this.state.content + e.target.value });
         document.getElementById("new-map-submit").addEventListener('click', () =>{
             this.props.onSubmit(document.getElementById("new-board-input-field").value);
-            this.setState({ expanded: false, content: '' });
+            this.escape;
         })
         document.getElementById("new-board-input-field").addEventListener("keyup", event => {
             if (event.key !== "Enter" || !document.getElementById("new-board-input-field").value) return;
@@ -28,11 +37,30 @@ class AddBoard extends Component {
             event.preventDefault();
         });
   }
-
+  componentDidUpdate() {
+    var newBoardArea = document.getElementById('newboard')
+    // go back to collapsed state if user clicks anywhere else on page
+    if (document.getElementById('newboard') && this.state.expanded){
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.add-board-component')) {
+                this.escape();
+                return;
+            }
+            return;
+        })
+        document.addEventListener('keydown', (event) => {
+            if (event.key === "Escape") {
+                this.escape();
+                return;
+            }
+        })
+    }
+    else { return; }
+  }
   render() {
     if (this.state.expanded) {
         return (
-    <div className="card bg-light shadow board">
+    <div className="card bg-light shadow board add-board-component" id="newboard">
         <div className="card-header">
             <ul className="nav nav-tabs card-header-tabs new-board-header">
                 <li className="nav-item">
@@ -68,6 +96,7 @@ class AddBoard extends Component {
     )
   }
 }
+
 
 
 export default AddBoard;
