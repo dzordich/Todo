@@ -38,6 +38,7 @@ class Board extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
+    this.handleUndoComplete = this.handleUndoComplete.bind(this);
     this.addNew = this.addNew.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
     this.updatePositions = this.updatePositions.bind(this);
@@ -105,7 +106,6 @@ class Board extends Component {
     this.updatePositions(tasks);
   }
   handleSubmit = (user, content) => {
-    console.log(user, content);
     let t = {
       "user": this.props.userURI,
       "content": content,
@@ -125,7 +125,6 @@ class Board extends Component {
     return;
   }
   handleComplete = (taskID) => {
-    console.log("got back to board")
     let completed = [];
     let incomplete = [];
     let taskToUpdate;
@@ -142,7 +141,6 @@ class Board extends Component {
     }
     incomplete.push(taskToUpdate);
     let updated = incomplete.concat(completed);
-    console.log(updated);
     this.setState({ tasks: updated });
     let places = [];
     for (let i = 0; i < updated.length; i++) {
@@ -157,6 +155,25 @@ class Board extends Component {
       },
       body: JSON.stringify(places)
     });
+  }
+  handleUndoComplete = (taskID) => {
+    let completed = [];
+    let incomplete = [];
+    let taskToUpdate;
+    let x = -1;
+    for (let i = 0; i < this.state.tasks.length; i++) {
+      if (this.state.tasks[i].id == taskID) {
+        taskToUpdate = this.state.tasks[i];
+      }
+      else if (this.state.tasks[i].completed) {
+        completed.push(this.state.tasks[i]);
+      } 
+      else { incomplete.push(this.state.tasks[i]) 
+      }      
+    }
+    incomplete.unshift(taskToUpdate);
+    let updated = incomplete.concat(completed);
+    this.setState({ tasks: updated });
   }
   
   render() {
@@ -188,7 +205,7 @@ class Board extends Component {
                     snapshot.isDragging,
                     provided.draggableProps.style
                     )}>  
-                      <Task data={t} uri={t.resource_uri} handleComplete={this.handleComplete} />
+                      <Task data={t} uri={t.resource_uri} handleComplete={this.handleComplete} undoComplete={this.handleUndoComplete} />
                     </div>)}
                   </Draggable>
                 )}
