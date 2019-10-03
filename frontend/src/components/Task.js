@@ -13,7 +13,7 @@ class Task extends Component {
   };
   state = {
       complete: this.props.data.completed,
-      classes: "card bg-dark shadow-sm task dimmed"
+      classes: "card shadow-sm task dimmed"
     };
 
   handleClick = () => {
@@ -44,9 +44,9 @@ class Task extends Component {
                     <a href="#" role="button"><i className="fas fa-check-circle"></i></a>
                 </div>  
             <div className="task-text-area">
-                <span className="card-text">{this.props.data.content}</span>
+                <span className="card-text"><span className="strikethrough">{this.props.data.content}</span></span>
             </div>
-            <a onMouseUp={() => this.props.handleDelete(this.props.uri)} className="badge badge-danger delete-button" href="#">Delete</a>
+            <a onMouseUp={() => this.props.handleDelete(this.props.uri)} className="shadow-sm badge badge-danger delete-button" href="#">Delete</a>
         </div>
         )
     }
@@ -58,7 +58,7 @@ class Task extends Component {
             <div className="task-text-area">
                 <span className="card-text">{this.props.data.content}</span>
             </div>
-            <a onMouseUp={() => this.props.handleDelete(this.props.uri)} className="badge badge-danger delete-button" href="#">Delete</a>
+            <a onMouseUp={() => this.props.handleDelete(this.props.uri)} className="badge shadow-sm badge-danger delete-button" href="#">Delete</a>
         </div>
     )
   }

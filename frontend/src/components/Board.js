@@ -215,16 +215,12 @@ class Board extends Component {
             {(provided, snapshot) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
               {this.state.tasks.map((t, index) => 
-                <Draggable key={t.date} draggableId={t.id} index={index}>
+                <Draggable key={t.date} draggableId={t.id} index={index} >
                 {(provided, snapshot) => (
-                  <div
+                  <div className="bg-none"
                   ref={provided.innerRef}
                   {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                  style={getItemStyle(
-                    snapshot.isDragging,
-                    provided.draggableProps.style
-                    )}>  
+                  {...provided.dragHandleProps}>  
                       <Task data={t} uri={t.resource_uri} handleComplete={this.handleComplete} undoComplete={this.handleUndoComplete} handleDelete={this.handleDelete} />
                     </div>)}
                   </Draggable>
