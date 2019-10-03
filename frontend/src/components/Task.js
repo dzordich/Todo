@@ -13,7 +13,7 @@ class Task extends Component {
   };
   state = {
       complete: this.props.data.completed,
-      classes: "card shadow-sm task dimmed"
+      classes: "card bg-dark shadow-sm task dimmed"
     };
 
   handleClick = () => {

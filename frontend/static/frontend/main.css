@@ -37,7 +37,6 @@ body {
 .task {
     padding: 0.65rem 0.95rem;
     margin-bottom: 5px;
-    background: linear-gradient(#282F37 0%, #1E2730 40%, #151C23 85%);
     border-radius: 5px;
     display: grid;
     grid-template-rows: auto;
