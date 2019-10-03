@@ -40,6 +40,7 @@ class Board extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
     this.handleUndoComplete = this.handleUndoComplete.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.addNew = this.addNew.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
     this.updatePositions = this.updatePositions.bind(this);
@@ -178,6 +179,22 @@ class Board extends Component {
     let updated = incomplete.concat(completed);
     this.setState({ tasks: updated });
   }
+  handleDelete = (taskURI) => {
+    let updated = [];
+    this.state.tasks.forEach((t) => {
+      if (t.resource_uri !== taskURI) {
+        updated.push(t);
+      }
+    });
+    this.setState({ tasks: updated });
+    let csrftoken = Cookies.get('csrftoken');
+    fetch(taskURI, {
+      method: 'DELETE',
+      headers: {
+        "X-CSRFToken": csrftoken
+      }
+    })
+  }
   
   render() {
     return (
@@ -208,7 +225,7 @@ class Board extends Component {
                     snapshot.isDragging,
                     provided.draggableProps.style
                     )}>  
-                      <Task data={t} uri={t.resource_uri} handleComplete={this.handleComplete} undoComplete={this.handleUndoComplete} />
+                      <Task data={t} uri={t.resource_uri} handleComplete={this.handleComplete} undoComplete={this.handleUndoComplete} handleDelete={this.handleDelete} />
                     </div>)}
                   </Draggable>
                 )}

@@ -8,7 +8,8 @@ class Task extends Component {
     data: PropTypes.object.isRequired,
     uri: PropTypes.string.isRequired,
     handleComplete: PropTypes.func.isRequired,
-    undoComplete: PropTypes.func.isRequired
+    undoComplete: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired
   };
   state = {
       complete: this.props.data.completed,
@@ -45,7 +46,7 @@ class Task extends Component {
             <div className="task-text-area">
                 <span className="card-text">{this.props.data.content}</span>
             </div>
-            <a className="badge badge-pill badge-danger delete-button"><i className="far fa-times-circle delete-icon"></i></a>
+            <a onMouseUp={() => this.props.handleDelete(this.props.uri)} className="badge badge-danger delete-button" href="#">Delete</a>
         </div>
         )
     }
@@ -57,6 +58,7 @@ class Task extends Component {
             <div className="task-text-area">
                 <span className="card-text">{this.props.data.content}</span>
             </div>
+            <a onMouseUp={() => this.props.handleDelete(this.props.uri)} className="badge badge-danger delete-button" href="#">Delete</a>
         </div>
     )
   }
