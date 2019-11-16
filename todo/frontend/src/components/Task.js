@@ -51,7 +51,7 @@ class Task extends Component {
         )
     }
     return (
-        <div className="card bg-dark shadow-sm task" key={this.props.key}>
+        <div className="card bg-info shadow-sm task" key={this.props.key}>
             <div className="task-checkbox-area" onClick={this.handleClick} key={this.props.key}>
             <a href="#" role="button" data-target=".task" aria-hidden="true"><i className="far fa-circle"></i></a>
             </div>  
