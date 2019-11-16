@@ -4,9 +4,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all -p dev django",
-    "dev": "webpack --mode development ./frontend/src/index.js --output ./frontend/static/frontend/compiled.js",
-    "build": "webpack --mode production ./frontend/src/index.js --output ./frontend/static/frontend/compiled.js",
-    "django": "python3 manage.py runserver"
+    "dev": "webpack --mode development --watch ./todo/frontend/src/index.js --output ./todo/frontend/static/frontend/compiled.js",
+    "build": "webpack --mode production ./todo/frontend/src/index.js --output ./todo/frontend/static/frontend/compiled.js",
+    "django": "python todo/manage.py runserver"
   },
   "author": "David Zordich",
   "license": "ISC",
