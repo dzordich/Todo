@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import Board from "./Board";
 import AddBoard from "./AddBoard"
 import Cookies from 'js-cookie';
+import { HotKeys } from "react-hotkeys";
+
 
 const PAGE_USER = document.querySelector('#loggedIn').dataset['username'];
 const USER_URI = `/api/v1/user/${PAGE_USER}`
@@ -17,6 +19,9 @@ class App extends React.Component {
         loaded: false,
         boards: []
       };
+    }
+    keyMap = {
+      NEW_
     }
     componentDidMount() {
       // let csrftoken = Cookies.get('csrftoken');
