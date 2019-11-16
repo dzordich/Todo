@@ -20,9 +20,7 @@ class App extends React.Component {
         boards: []
       };
     }
-    keyMap = {
-      NEW_
-    }
+
     componentDidMount() {
       // let csrftoken = Cookies.get('csrftoken');
       fetch(BOARDS_ENDPOINT)
