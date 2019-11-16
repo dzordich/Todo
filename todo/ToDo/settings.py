@@ -10,17 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+# import environ
+from envs import env
 import os
+
+# environment = environ.Env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# environ.Env.read_env(environment.str(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9hjq-ub7wz$=7h++qe#31ky_o^7$ba)a3l#4xgzsx_*#k#c1l='
+SECRET_KEY = env('SECRET_KEY', '9hjq-ub7wz$=7h++qe#31ky_o^7$ba)a3l#4xgzsx_*#k#c1l=')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -92,11 +97,15 @@ WSGI_APPLICATION = 'ToDo.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": env("DB_ENGINE", "django.db.backends.mysql"),
+        "NAME": env("DB_NAME", "tododb"),
+        "HOST": env("DB_HOST", "db"),
+        "USER": env("DB_USER", "root"),
+        "PASSWORD": env("DB_PASSWORD", "db_key"),
     }
 }
+
 
 
 # Password validation

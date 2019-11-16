@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Task from "./Task";
 import AddTask from './AddTask';
 import Cookies from 'js-cookie';
-import $ from "jquery";
 
 const organize = (data) => {
   let completed = [];
