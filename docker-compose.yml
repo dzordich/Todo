@@ -1,0 +1,30 @@
+version: '3'
+services: 
+  web:
+    restart: always
+    build: .
+    expose: 
+      - "8000"
+    ports:
+      - "8000:8000"
+    volumes: 
+      - .:/code/todo
+    env_file: .env
+    command: ["npm", "start"]
+    depends_on:
+      - db
+    links:
+      - db:db
+  db:
+    image: mysql:5.6
+    restart: always
+    environment: 
+      - MYSQL_ROOT_PASSWORD=db_key
+      - MYSQL_DATABASE=tododb
+    expose:
+      - 3306
+    volumes:
+      - mysql:/var/lib/mysql
+volumes: 
+  mysql:
+    driver: local
