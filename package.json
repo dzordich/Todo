@@ -6,7 +6,7 @@
     "start": "npm-run-all -p dev django",
     "dev": "webpack --mode development --watch ./todo/frontend/src/index.js --output ./todo/frontend/static/frontend/compiled.js",
     "build": "webpack --mode production ./todo/frontend/src/index.js --output ./todo/frontend/static/frontend/compiled.js",
-    "django": "python todo/manage.py runserver"
+    "django": "python todo/manage.py runserver 0.0.0.0:8999"
   },
   "author": "David Zordich",
   "license": "ISC",

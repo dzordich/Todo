@@ -4,9 +4,9 @@ services:
     restart: always
     build: .
     expose: 
-      - "8000"
+      - "8999"
     ports:
-      - "8000:8000"
+      - "8999:8999"
     volumes: 
       - .:/code/todo
     env_file: .env
