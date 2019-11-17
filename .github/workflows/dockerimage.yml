@@ -11,6 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag dzordich-todo:$(date +%s)
+      run: docker build . --file Dockerfile --tag todo_web:$(date +%s)
+    - name: Add Env
+      run: docker container run todo_web touch .env
     - name: Run migrations
-      run: docker-compose run --rm web python manage.py migrate
+      run: docker container run todo_web python manage.py migrate
