@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path, include, re_path
 from backend.api import TaskResource, BoardResource, UserResource
 from backend.views import update_pos
 from frontend.views import index
 from tastypie.api import Api
 
+from graphene_django.views import GraphQLView
 
 task_resource = TaskResource()
 board_resource = BoardResource()
@@ -38,4 +39,5 @@ urlpatterns = [
     path('api/', include(v1_api.urls)),
     path('api/positions/', update_pos),
     path('', index, name='index'),
+    re_path(r'^graphql$', GraphQLView.as_view(graphiql=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
