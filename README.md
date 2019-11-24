@@ -1,7 +1,19 @@
 # Todo
 
-This is a simple to-do list app designed to keep the focus on productivity. The inspiration for this app came from using many to-do apps that were cluttered with far to many features. Tasks don't need tags, or color coding, or locations. A task is binary - either complete or incomplete. This app prioritizes speed and ease of use, and doesn't provide any unecessary features. 
-
-Tasks are grouped in boards, and can be reordered to change priority. You can set due dates and get reminders. Other than that, there's not a whole lot more to it. 
+Simple to-do list app. Lets you group tasks into boards and such. 
 
 The front end of the app is built with React.js, and the back end is Django and Tastypie.
+
+
+### Cloning the repo
+
+You will need to have Docker and docker-compose installed on you computer.
+
++ `cd` into the top level (root) of the project directory
++ Build the container with `docker-compose build`
++ Run migrations in the container and create a superuser:
+  ```
+  docker-compose run web python manage.py migrate
+  docker-compose run web python manage.py createsuperuser
+  ``` 
++ Run `docker-compose up` to start the development server.
