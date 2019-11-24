@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'backend',
     'frontend',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
@@ -104,6 +105,10 @@ DATABASES = {
         "USER": env("DB_USER", "root"),
         "PASSWORD": env("DB_PASSWORD", "db_key"),
     }
+}
+
+GRAPHENE = {
+    'SCHEMA': 'ToDo.schema.schema'
 }
 
 
