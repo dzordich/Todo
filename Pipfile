@@ -6,14 +6,25 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "*"
 prospector = "==1.1.6.2"
-whitenoise = "*"
+whitenoise = "==4.1.4"
 django-registration-redux = "*"
 python-mimeparse = "*"
-django-tastypie = "*"
-djangorestframework = "*"
-django-allauth = "*"
+django-tastypie = "==0.14.2"
+djangorestframework = "==3.10.3"
+django-allauth = "==0.40.0"
+django-environ = "~=0.4"
+mysqlclient = "~=1.4"
+django-mysql = "==2.4.1"
+graphene-django = "~=2.0"
+envs = "==1.2.6"
+isort = "==4.3.21"
+oauthlib = "==3.1.0"
+requests = "==2.22.0"
+requests-oauthlib = "==1.2.0"
+urllib3 = "==1.25.6"
+wrapt = "==1.11.2"
+Django = "==2.2.6"
 
 [requires]
 python_version = "3.7"
